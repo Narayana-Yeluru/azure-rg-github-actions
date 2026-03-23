@@ -1,0 +1,21 @@
+name: Run - Create Azure Resource Group
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: "Resource Group Name"
+        required: true
+        default: "my-github-rg"
+      location:
+        description: "Azure Location"
+        required: true
+        default: "eastus"
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/create-rg.yml
+    with:
+      resource_group: ${{ inputs.resource_group }}
+      location: ${{ inputs.location }}
+    secrets: inherit
